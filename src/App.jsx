@@ -175,21 +175,16 @@ const getDeveloperText = (isDeveloper) =>
 
         <button className="btn btn-primary" type="submit">Create</button>
       </form>
-
-      
-       
+     
      </div>
    );
 }
-
-
 
  
 //UserList component
 const UserList = (props) =>  (
   <ul>
      {props.list.map((item) => (
-      
        <User key={item.id} item={item}
         />
      ))}
