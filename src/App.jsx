@@ -12,6 +12,8 @@ import viteLogo from '/vite.svg'
 import {getAsyncStories, getUsers, createUser, updateUser, deleteUser } from './api';
 import './App.css'
 
+const getDeveloperText = (isDeveloper) =>
+  `is ${isDeveloper ? 'a' : 'not a'} developer`
 
  // Eliminate "return" statement and enclosing bracket if no business 
  //business logic. Otherwise retain the {} and put a "return" statement
@@ -122,14 +124,40 @@ import './App.css'
       console.log(error);
     }
   };
+
   if (!users) {
     return null;
   }
 
   return (
      <div>
+      
+      <ul>
+        {users.map((user) => {
+          const developerText = getDeveloperText(user.isDeveloper);
+          return (
+            <li key={user.id}>
+              {user.firstName} {user.lastName} {developerText}
+              <button
+                type="button"
+                onClick={() => handleEdit(user.id)}
+              >
+                Toggle Developer (Update)
+              </button>
+              <button
+                type="button"
+                onClick={() => handleRemove(user.id)}
+              >
+                Remove User (Delete)
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+       
+       <hr />
        <h1> Create a User</h1>
-       <span>Create User:</span>
 
       <form onSubmit={handleCreate}>
         <label>
@@ -145,8 +173,7 @@ import './App.css'
         <button className="btn btn-primary" type="submit">Create</button>
       </form>
 
-       <hr />
-       <UserList list={users}/>
+      
        
      </div>
    );
@@ -184,7 +211,6 @@ const UserList = (props) =>  (
      {props.list.map((item) => (
       
        <User key={item.id} item={item}
-       
         />
      ))}
   </ul>
@@ -196,6 +222,8 @@ const User = (props) => (
       <span>{props.item.id}</span>
       <span>{props.item.firstName}</span>
       <span>{props.item.lastName}</span>
+      <span>
+
       <button
           type="button" 
           onClick={() => handleEdit(props.item.id)}
@@ -203,12 +231,16 @@ const User = (props) => (
       >
         Update 
       </button>
+      </span>
+
+      <span>
       <button
           type="button"
           onClick={() => handleRemove(props.item.id)}
         >
           Remove User (Delete)
         </button>
+        </span>
   </li>
   
   ); 
