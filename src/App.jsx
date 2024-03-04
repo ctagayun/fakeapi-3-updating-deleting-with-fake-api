@@ -156,8 +156,8 @@ const getDeveloperText = (isDeveloper) =>
       </ul>
 
       <hr />
-
-      <List list={users}/>
+     
+      <UserList list={users}/>
        
        <hr />
        <h1> Create a User</h1>
@@ -182,41 +182,8 @@ const getDeveloperText = (isDeveloper) =>
    );
 }
 
-// List component
-const List = (props) =>  (
-  <ul>
-     {props.list.map((item) => (
-       <Item key={item.id} item={item} />
-     ))}
-  </ul>
- 
-);
 
-//Item component
-//Create another component that will display list of users.
-//This component called "Item" encapsulates the task of displaying 
-//each stories' record
-const Item = (props) => (
-<li>
-      <span>{props.item.id}</span>
-      <span>{props.item.firstName}</span>
-      <button
-          type="button"
-          onClick={() => handleEdit(props.item.id)}
-        >
-          Toggle Developer (Update)
-        </button>
-      <span>{props.item.lastName}</span>
-      <button
-          type="button"
-          onClick={() => handleRemove(props.item.id)}
-        >
-          Remove User (Delete)
-        </button>
 
-    </li>
-
-);     
  
 //UserList component
 const UserList = (props) =>  (
@@ -230,6 +197,7 @@ const UserList = (props) =>  (
  
 );
 
+//https://www.robinwieruch.de/react-event-handler/ - study this
 const User = (props) => (
   <li>
       <span>{props.item.id}</span>
