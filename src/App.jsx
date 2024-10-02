@@ -104,6 +104,7 @@ const getDeveloperText = (isDeveloper) =>
     }
   };
 
+  
   const handleEdit = async (id) => {
     const user = users.find((user) => user.id === id);
     const isDeveloper = !user.isDeveloper;
